@@ -29,7 +29,7 @@ stages:
 
   - stage: BuildStaging
     dependsOn: BuildDev
-    condition: succedded('BuildDev')
+    condition: succeeded('BuildDev')
     displayName: Build package for QA
     jobs: 
     - job: BuildMobileApp
@@ -58,7 +58,7 @@ stages:
     dependsOn: 
       - BuildDev
       - BuildStaging
-    condition: and(succedded('BuildDev'),succedded('BuildStaging'))
+    condition: and(succeeded('BuildDev'),succeeded('BuildStaging'))
     displayName: Build package for Prod 
     jobs: 
     - job: BuildMobileApp
