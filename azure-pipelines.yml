@@ -28,6 +28,8 @@ stages:
           displayName: Running Node app
 
   - stage: BuildStaging
+    dependsOn: BuildDev
+    condition: succedded('BuildDev')
     displayName: Build package for QA
     jobs: 
     - job: BuildMobileApp
@@ -37,12 +39,14 @@ stages:
         - script: echo running unit test
           displayName: Running mobile app
     - job: BuildReactApp
+      dependsOn: BuildMobileApp
       steps:
         - script: echo building react app
           displayName: Building react app
         - script: echo running unit test
           displayName: Running react app
     - job: BuildNodeApp
+      dependsOn: BuildReactApp 
       steps:
         - script: echo building Node app
           displayName: Building Node app
@@ -51,6 +55,10 @@ stages:
 
     
   - stage: DeployProd
+    dependsOn: 
+      - BuildDev
+      - BuildStaging
+    condition: and(succedded('BuildDev'),succedded('BuildStaging'))
     displayName: Build package for Prod 
     jobs: 
     - job: BuildMobileApp
@@ -60,12 +68,14 @@ stages:
         - script: echo running unit test
           displayName: Running mobile app
     - job: BuildReactApp
+      dependsOn: BuildMobileApp
       steps:
         - script: echo building react app
           displayName: Building react app
         - script: echo running unit test
           displayName: Running react app
     - job: BuildNodeApp
+      dependsOn: BuildReactApp 
       steps:
         - script: echo building Node app
           displayName: Building Node app
