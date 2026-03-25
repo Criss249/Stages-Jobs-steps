@@ -4,11 +4,25 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: BuildDev
+    displayname: Build package for Dev 
+    jobs: 
+    - job: BuildMobileApp
+    - job: BuildReactApp
+    - job: BuildNodeApp
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - stage: BuildStaging
+    displayname: Build package for QA
+    jobs: 
+    - job: BuildMobileApp
+    - job: BuildReactApp
+    - job: BuildNodeApp
+
+    
+  - stage: DeployProd
+    displayname: Build package for Prod 
+    jobs: 
+    - job: BuildMobileApp
+    - job: BuildReactApp
+    - job: BuildNodeApp
