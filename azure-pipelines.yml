@@ -6,23 +6,68 @@ pool:
 
 stages:
   - stage: BuildDev
-    displayname: Build package for Dev 
+    displayName: Build package for Dev 
     jobs: 
     - job: BuildMobileApp
+      steps:
+        - script: echo building mobile app
+          displayName: Building mobile app
+        - script: echo running unit test
+          displayName: Running mobile app
     - job: BuildReactApp
+      steps:
+        - script: echo building react app
+          displayName: Building react app
+        - script: echo running unit test
+          displayName: Running react app
     - job: BuildNodeApp
+      steps:
+        - script: echo building Node app
+          displayName: Building Node app
+        - script: echo running unit test
+          displayName: Running Node app
 
   - stage: BuildStaging
-    displayname: Build package for QA
+    displayName: Build package for QA
     jobs: 
     - job: BuildMobileApp
+      steps:
+        - script: echo building mobile app
+          displayName: Building mobile app
+        - script: echo running unit test
+          displayName: Running mobile app
     - job: BuildReactApp
+      steps:
+        - script: echo building react app
+          displayName: Building react app
+        - script: echo running unit test
+          displayName: Running react app
     - job: BuildNodeApp
+      steps:
+        - script: echo building Node app
+          displayName: Building Node app
+        - script: echo running unit test
+          displayName: Running Node app
 
     
   - stage: DeployProd
-    displayname: Build package for Prod 
+    displayName: Build package for Prod 
     jobs: 
     - job: BuildMobileApp
+      steps:
+        - script: echo building mobile app
+          displayName: Building mobile app
+        - script: echo running unit test
+          displayName: Running mobile app
     - job: BuildReactApp
+      steps:
+        - script: echo building react app
+          displayName: Building react app
+        - script: echo running unit test
+          displayName: Running react app
     - job: BuildNodeApp
+      steps:
+        - script: echo building Node app
+          displayName: Building Node app
+        - script: echo running unit test
+          displayName: Running Node app
